@@ -1,55 +1,66 @@
+let cartCount = 0;
+
 const products = [
-  { id: 1, name: "Mobile", price: 15000, img: "https://via.placeholder.com/150" },
-  { id: 2, name: "Laptop", price: 50000, img: "https://via.placeholder.com/150" },
-  { id: 3, name: "Headphones", price: 2000, img: "https://via.placeholder.com/150" },
-  { id: 4, name: "Shoes", price: 3000, img: "https://via.placeholder.com/150" }
+    {
+        name: "Smartphone",
+        price: 15000,
+        image: "https://via.placeholder.com/200"
+    },
+    {
+        name: "Headphones",
+        price: 2000,
+        image: "https://via.placeholder.com/200"
+    },
+    {
+        name: "Shoes",
+        price: 3000,
+        image: "https://via.placeholder.com/200"
+    },
+    {
+        name: "Watch",
+        price: 2500,
+        image: "https://via.placeholder.com/200"
+    }
 ];
 
-let cart = [];
+const productList = document.getElementById("productList");
+const cartDisplay = document.getElementById("cartCount");
 
-function displayProducts() {
-  const productList = document.getElementById("product-list");
+// Display Products
+function showProducts(items) {
+    productList.innerHTML = "";
 
-  products.forEach(p => {
-    productList.innerHTML += `
-      <div class="card">
-        <img src="${p.img}">
-        <h3>${p.name}</h3>
-        <p>₹${p.price}</p>
-        <button onclick="addToCart(${p.id})">Add to Cart</button>
-      </div>
-    `;
-  });
+    items.forEach((product, index) => {
+        const div = document.createElement("div");
+        div.classList.add("product");
+
+        div.innerHTML = `
+            <img src="${product.image}">
+            <h3>${product.name}</h3>
+            <p>₹${product.price}</p>
+            <button onclick="addToCart()">Add to Cart</button>
+        `;
+
+        productList.appendChild(div);
+    });
 }
 
-function addToCart(id) {
-  const product = products.find(p => p.id === id);
-  cart.push(product);
-  updateCart();
+// Add to cart
+function addToCart() {
+    cartCount++;
+    cartDisplay.textContent = cartCount;
 }
 
-function updateCart() {
-  document.getElementById("cart-count").innerText = cart.length;
+// Search functionality
+document.getElementById("searchBox").addEventListener("keyup", function () {
+    const value = this.value.toLowerCase();
 
-  const cartItems = document.getElementById("cart-items");
-  cartItems.innerHTML = "";
+    const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(value)
+    );
 
-  let total = 0;
+    showProducts(filtered);
+});
 
-  cart.forEach(item => {
-    total += item.price;
-    cartItems.innerHTML += `<li>${item.name} - ₹${item.price}</li>`;
-  });
-
-  document.getElementById("total").innerText = total;
-}
-
-function viewCart() {
-  document.getElementById("cart-section").style.display = "block";
-}
-
-function closeCart() {
-  document.getElementById("cart-section").style.display = "none";
-}
-
-displayProducts();
+// Initial Load
+showProducts(products);
