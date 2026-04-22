@@ -2,22 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Flipkart Clone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipkart</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <!-- Navbar -->
     <div class="navbar">
-        <h2 class="logo">Flipkart</h2>
-        <input type="text" placeholder="Search for products..." id="searchBox">
-        <div class="cart">
-            🛒 Cart: <span id="cartCount">0</span>
+        <div class="navbar-top">
+            <div class="logo">🛍️ Flipkart</div>
+            <div class="search-container">
+                <input type="text" placeholder="Search for Products, Brands and More" id="searchBox" class="search-box">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="nav-icons">
+                <div class="icon-item">❤️</div>
+                <div class="icon-item">📤</div>
+            </div>
         </div>
     </div>
 
-    <!-- Products -->
-    <div class="products" id="productList"></div>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <span>Home</span> / <span>Electronics</span> / <span>Mobiles</span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Product Details Section -->
+        <div class="product-section">
+            <div class="product-images">
+                <div class="main-image">
+                    <img id="mainImage" src="https://via.placeholder.com/400x500" alt="Product">
+                </div>
+                <div class="product-icons">
+                    <div class="icon-button">❤️</div>
+                    <div class="icon-button">📤</div>
+                </div>
+            </div>
+
+            <div class="product-info">
+                <h2 id="productName">Moto G57 Power 5G</h2>
+                <div class="rating">⭐⭐⭐⭐ 4.4</div>
+                <div class="price-section">
+                    <span class="price" id="productPrice">₹10,999</span>
+                    <span class="original-price">₹15,999</span>
+                    <span class="discount">31% off</span>
+                </div>
+                <div class="features">
+                    <p>📱 6.5" Display</p>
+                    <p>🔋 5000mAh Battery</p>
+                    <p>📸 50MP Camera</p>
+                    <p>⚡ Snapdragon 6s Gen 4</p>
+                </div>
+                <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="productList"></div>
 
     <script src="script.js"></script>
 </body>
